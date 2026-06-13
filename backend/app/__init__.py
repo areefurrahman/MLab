@@ -1,4 +1,6 @@
 from flask import Flask
+
+from backend.app.utils.error_handlers import register_error_handlers
 from .config import config_map
 from .extensions import db, migrate, jwt, cors
 
@@ -23,6 +25,7 @@ def create_app(config_name: str = "development") -> Flask:
     jwt.init_app(app)
     cors.init_app(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
+    register_error_handlers(app)
 
     with app.app_context():
         from app.models import User, Dataset, Experiment
