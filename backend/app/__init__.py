@@ -23,6 +23,10 @@ def create_app(config_name: str = "development") -> Flask:
     jwt.init_app(app)
     cors.init_app(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
+
+    with app.app_context():
+        from app.models import User, Dataset, Experiment
+
     # 3. Register Blueprints (routes)
     from .api.auth import auth_bp
     from .api.algorithms import algorithms_bp

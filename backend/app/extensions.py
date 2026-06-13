@@ -8,7 +8,3 @@ migrate = Migrate()
 jwt = JWTManager()
 cors = CORS()
 
-
-
-from flask import Flask
-from flask_migrate import migrate
