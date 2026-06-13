@@ -1,6 +1,6 @@
 from flask import Flask
 
-from backend.app.utils.error_handlers import register_error_handlers
+from app.utils.error_handlers import register_error_handlers
 from .config import config_map
 from .extensions import db, migrate, jwt, cors
 
