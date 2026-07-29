@@ -28,6 +28,12 @@ class Experiment(db.Model):
         nullable=True   # nullable because built-in datasets aren't stored as rows
     )
 
+    comparison_group_id = db.Column(
+    db.Integer,
+    db.ForeignKey("comparison_groups.id", ondelete="CASCADE"),
+    nullable=True   # null = standalone experiment from Studio
+)
+
     # Algorithm details
     algorithm_name = db.Column(db.String(100), nullable=False)  # "naive_bayes"
     algorithm_display_name = db.Column(db.String(100), nullable=False)  # "Naive Bayes"
@@ -66,11 +72,13 @@ class Experiment(db.Model):
             "parameters": self.parameters,
             "task_type": self.task_type,
             "status": self.status,
+            "celery_task_id": self.celery_task_id,
             "result": self.result,
             "error_message": self.error_message,
             "duration_seconds": self.duration_seconds,
             "created_at": self.created_at.isoformat(),
             "dataset_id": self.dataset_id,
+            "comparison_group_id": self.comparison_group_id,
         }
 
     def __repr__(self) -> str:

@@ -9,6 +9,12 @@ class Config:
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "jwt-secret-change-this")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAX_DATASET_ROWS = 1000
+    UPLOAD_FOLDER = os.path.join(os.getcwd(), "uploads")
+
+    # existing settings  
+    CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/0")
+    CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379/0")
+
 
     # JWT settings
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
